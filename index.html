@@ -138,6 +138,19 @@
             background: #f1f1f1;
         }
 
+        /* SUPPORT BUTTON */
+
+        .button-support {
+            border: 1px solid #e0caca;
+            background: #fff7f7;
+            color: #a33;
+        }
+
+        .button-support:hover {
+            background: #fff0f0;
+            transform: translateY(-1px);
+        }
+
         /* SECTIONS */
 
         section {
@@ -271,6 +284,24 @@
             background: #eee;
         }
 
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .download .button-support {
+            background: transparent;
+            border: 1px solid #777;
+            color: #fff;
+        }
+
+        .download .button-support:hover {
+            background: #333;
+            border-color: #999;
+        }
+
         /* FOOTER */
 
         footer {
@@ -379,6 +410,12 @@
                    href="https://github.com/BIMForgeLab/pomodoro-timer"
                    target="_blank">
                     GitHub
+                </a>
+
+                <a class="button button-support"
+                   href="https://pay.cloudtips.ru/p/b29bdd2b"
+                   target="_blank">
+                    ❤️ Поддержать разработку
                 </a>
 
             </div>
@@ -599,11 +636,21 @@
                 и попробуйте работать с задачами более осознанно.
             </p>
 
-            <a class="button button-primary"
-               href="https://github.com/BIMForgeLab/pomodoro-timer/releases/latest"
-               target="_blank">
-                ⬇ Скачать PomoDDoro
-            </a>
+            <div class="download-buttons">
+
+                <a class="button button-primary"
+                   href="https://github.com/BIMForgeLab/pomodoro-timer/releases/latest"
+                   target="_blank">
+                    ⬇ Скачать PomoDDoro
+                </a>
+
+                <a class="button button-support"
+                   href="https://pay.cloudtips.ru/p/b29bdd2b"
+                   target="_blank">
+                    ❤️ Поддержать разработку
+                </a>
+
+            </div>
 
         </div>
 
