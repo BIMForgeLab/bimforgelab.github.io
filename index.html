@@ -4,21 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PomoDDoro — таймер Pomodoro и планировщик задач</title>
+    <title>PomoDDoro — Pomodoro-таймер и планировщик задач</title>
 
     <meta name="description"
-          content="PomoDDoro — настольный Pomodoro-таймер с планировщиком задач, матрицей приоритетов и статистикой затраченного времени.">
+          content="PomoDDoro — настольный Pomodoro-таймер с планировщиком задач, матрицей приоритетов, комментариями, тёмной темой и статистикой затраченного времени.">
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -27,15 +21,9 @@
             line-height: 1.6;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+        a { text-decoration: none; color: inherit; }
 
-        .container {
-            width: min(1100px, 92%);
-            margin: 0 auto;
-        }
+        .container { width: min(1100px, 92%); margin: 0 auto; }
 
         /* HEADER */
 
@@ -71,6 +59,12 @@
             border-radius: 10px;
         }
 
+        .nav-wrap {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
         nav {
             display: flex;
             gap: 25px;
@@ -78,8 +72,32 @@
             color: #555;
         }
 
-        nav a:hover {
-            color: #000;
+        nav a:hover { color: #000; }
+
+        .lang-switch {
+            display: flex;
+            gap: 4px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 3px;
+            background: #fafafa;
+        }
+
+        .lang-switch button {
+            border: none;
+            background: transparent;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 6px;
+            color: #666;
+            transition: 0.2s;
+        }
+
+        .lang-switch button.active {
+            background: #222;
+            color: #fff;
         }
 
         /* HERO */
@@ -111,9 +129,7 @@
             letter-spacing: -2px;
         }
 
-        .hero h1 span {
-            font-weight: 400;
-        }
+        .hero h1 span { font-weight: 400; }
 
         .hero p {
             max-width: 700px;
@@ -129,12 +145,16 @@
         }
 
         .button {
-            display: inline-block;
-            padding: 14px 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 22px;
             border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             transition: 0.2s;
+            cursor: pointer;
+            border: none;
         }
 
         .button-primary {
@@ -153,9 +173,7 @@
             color: #222;
         }
 
-        .button-secondary:hover {
-            background: #f1f1f1;
-        }
+        .button-secondary:hover { background: #f1f1f1; }
 
         .button-support {
             border: 1px solid #e2caca;
@@ -166,6 +184,25 @@
         .button-support:hover {
             background: #fff0f0;
             transform: translateY(-1px);
+        }
+
+        /* Windows-кнопка */
+
+        .button-windows {
+            background: linear-gradient(135deg, #0078d4, #005a9e);
+            color: #fff;
+        }
+
+        .button-windows:hover {
+            background: linear-gradient(135deg, #0086ea, #0068b5);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 120, 212, 0.3);
+        }
+
+        .button-windows svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
 
         /* SCREENSHOTS */
@@ -185,16 +222,11 @@
             border-radius: 9px;
         }
 
-        .hero-shot {
-            max-width: 360px;
-            margin: 0 auto;
-        }
+        .hero-shot { max-width: 360px; margin: 0 auto; }
 
         /* SECTIONS */
 
-        section {
-            padding: 75px 0;
-        }
+        section { padding: 75px 0; }
 
         .section-title {
             text-align: center;
@@ -211,9 +243,7 @@
 
         /* FEATURES */
 
-        .features {
-            background: #f7f7f7;
-        }
+        .features { background: #f7f7f7; }
 
         .feature-grid {
             display: grid;
@@ -226,28 +256,124 @@
             padding: 28px;
             border: 1px solid #e7e7e7;
             border-radius: 12px;
+            transition: 0.2s;
         }
 
-        .feature-icon {
-            font-size: 30px;
-            margin-bottom: 15px;
+        .feature:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
         }
 
-        .feature h3 {
+        .feature-icon { font-size: 30px; margin-bottom: 15px; }
+
+        .feature h3 { margin-bottom: 10px; font-size: 20px; }
+
+        .feature p { color: #666; font-size: 15px; }
+
+        /* WHY (Почему PomoDDoro) */
+
+        .why {
+            background: #fff;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .why-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 12px;
+            background: #fafafa;
+            border: 1px solid #eee;
+        }
+
+        .why-num {
+            font-size: 42px;
+            font-weight: 800;
+            color: #222;
+            line-height: 1;
             margin-bottom: 10px;
-            font-size: 20px;
         }
 
-        .feature p {
-            color: #666;
+        .why-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .why-card p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* TESTIMONIALS (Отзывы) */
+
+        .testimonials {
+            background: #f7f7f7;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .testimonial {
+            background: #fff;
+            padding: 28px;
+            border-radius: 12px;
+            border: 1px solid #e7e7e7;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .testimonial-text {
+            color: #444;
             font-size: 15px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #222;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .avatar.green { background: #2a9d55; }
+        .avatar.orange { background: #d97706; }
+        .avatar.blue { background: #2563eb; }
+
+        .author-name {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .author-role {
+            font-size: 12px;
+            color: #888;
         }
 
         /* SCREENSHOT SHOWCASE */
 
-        .showcase {
-            background: #fff;
-        }
+        .showcase { background: #fff; }
 
         .showcase-grid {
             display: grid;
@@ -284,10 +410,7 @@
             font-weight: 700;
         }
 
-        .stats-shot {
-            max-width: 760px;
-            margin: 0 auto;
-        }
+        .stats-shot { max-width: 760px; margin: 0 auto; }
 
         .caption {
             text-align: center;
@@ -298,9 +421,7 @@
 
         /* MATRIX */
 
-        .matrix-section {
-            background: #fff;
-        }
+        .matrix-section { background: #fff; }
 
         .matrix {
             display: grid;
@@ -316,20 +437,71 @@
             border: 1px solid #ddd;
         }
 
-        .matrix-item h3 {
-            margin-bottom: 8px;
+        .matrix-item h3 { margin-bottom: 8px; }
+
+        .matrix-item p { color: #666; font-size: 14px; }
+
+        /* FAQ */
+
+        .faq {
+            background: #f7f7f7;
         }
 
-        .matrix-item p {
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .faq-item summary {
+            cursor: pointer;
+            padding: 20px 24px;
+            font-weight: 600;
+            font-size: 16px;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            transition: background 0.2s;
+        }
+
+        .faq-item summary:hover {
+            background: #fafafa;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: "+";
+            font-size: 22px;
+            font-weight: 400;
+            color: #888;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .faq-item[open] summary::after {
+            content: "−";
+            color: #222;
+        }
+
+        .faq-answer {
+            padding: 0 24px 22px;
             color: #666;
-            font-size: 14px;
+            font-size: 15px;
         }
 
         /* REQUIREMENTS */
 
-        .requirements {
-            background: #f7f7f7;
-        }
+        .requirements { background: #f7f7f7; }
 
         .requirements-box {
             max-width: 700px;
@@ -340,13 +512,8 @@
             border: 1px solid #e5e5e5;
         }
 
-        .requirements-box ul {
-            padding-left: 20px;
-        }
-
-        .requirements-box li {
-            margin-bottom: 8px;
-        }
+        .requirements-box ul { padding-left: 20px; }
+        .requirements-box li { margin-bottom: 8px; }
 
         /* DOWNLOAD */
 
@@ -374,13 +541,14 @@
             flex-wrap: wrap;
         }
 
-        .download .button-primary {
+        .download .button-windows {
             background: #fff;
-            color: #222;
+            color: #0078d4;
         }
 
-        .download .button-primary:hover {
-            background: #eee;
+        .download .button-windows:hover {
+            background: #f0f8ff;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
         }
 
         .download .button-support {
@@ -404,107 +572,75 @@
             font-size: 14px;
         }
 
-        footer a {
-            color: #ddd;
-        }
-
-        footer a:hover {
-            color: #fff;
-        }
+        footer a { color: #ddd; }
+        footer a:hover { color: #fff; }
 
         /* MOBILE */
 
+        @media (max-width: 950px) {
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonial-grid { grid-template-columns: 1fr 1fr; }
+        }
+
         @media (max-width: 850px) {
             .hero-grid,
-            .showcase-grid {
-                grid-template-columns: 1fr;
-            }
+            .showcase-grid { grid-template-columns: 1fr; }
 
-            .hero-grid {
-                gap: 40px;
-            }
-
-            .hero-shot {
-                max-width: 320px;
-            }
-
-            .showcase-grid {
-                gap: 35px;
-            }
-
-            .showcase-text {
-                text-align: center;
-            }
-
-            .showcase-list {
-                display: inline-block;
-                text-align: left;
-            }
+            .hero-grid { gap: 40px; }
+            .hero-shot { max-width: 320px; }
+            .showcase-grid { gap: 35px; }
+            .showcase-text { text-align: center; }
+            .showcase-list { display: inline-block; text-align: left; }
         }
 
         @media (max-width: 750px) {
-            nav {
-                display: none;
-            }
+            nav { display: none; }
 
-            .hero {
-                padding: 55px 0;
-            }
+            .hero { padding: 55px 0; }
+            .hero-logo { width: 85px; height: 85px; }
+            .hero p { font-size: 17px; }
 
-            .hero-logo {
-                width: 85px;
-                height: 85px;
-            }
+            .feature-grid { grid-template-columns: 1fr; }
+            .matrix { grid-template-columns: 1fr; }
 
-            .hero p {
-                font-size: 17px;
-            }
+            section { padding: 55px 0; }
 
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
+            .section-title { font-size: 30px; }
+            .showcase-text h2 { font-size: 29px; }
+            .download h2 { font-size: 30px; }
 
-            .matrix {
-                grid-template-columns: 1fr;
-            }
-
-            section {
-                padding: 55px 0;
-            }
-
-            .section-title {
-                font-size: 30px;
-            }
-
-            .showcase-text h2 {
-                font-size: 29px;
-            }
-
-            .download h2 {
-                font-size: 30px;
-            }
+            .why-grid,
+            .testimonial-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
-<body>
+<body data-lang="ru">
 
 <header>
     <div class="container header-inner">
 
         <a class="brand" href="#">
-            <img src="images/PomoDDoro_LOGO.png" alt="Логотип PomoDDoro">
+            <img src="images/PomoDDoro_LOGO.png" alt="PomoDDoro">
             <span>PomoDDoro</span>
         </a>
 
-        <nav>
-            <a href="#features">Возможности</a>
-            <a href="#screenshots">Интерфейс</a>
-            <a href="#matrix">Матрица задач</a>
-            <a href="#requirements">Требования</a>
-            <a href="https://github.com/BIMForgeLab/pomodoro-timer"
-               target="_blank" rel="noopener">GitHub</a>
-        </nav>
+        <div class="nav-wrap">
+            <nav>
+                <a href="#features" data-ru="Возможности" data-en="Features">Возможности</a>
+                <a href="#why" data-ru="Почему мы" data-en="Why us">Почему мы</a>
+                <a href="#screenshots" data-ru="Интерфейс" data-en="Interface">Интерфейс</a>
+                <a href="#matrix" data-ru="Матрица задач" data-en="Task matrix">Матрица задач</a>
+                <a href="#faq" data-ru="FAQ" data-en="FAQ">FAQ</a>
+                <a href="https://github.com/BIMForgeLab/pomodoro-timer"
+                   target="_blank" rel="noopener">GitHub</a>
+            </nav>
+
+            <div class="lang-switch" role="group" aria-label="Language">
+                <button type="button" data-lang-btn="ru" class="active">RU</button>
+                <button type="button" data-lang-btn="en">EN</button>
+            </div>
+        </div>
 
     </div>
 </header>
@@ -515,31 +651,32 @@
     <!-- HERO -->
 
     <section class="hero">
-
         <div class="container hero-grid">
 
             <div class="hero-content">
 
-                <img class="hero-logo"
-                     src="images/PomoDDoro_LOGO.png"
-                     alt="PomoDDoro">
+                <img class="hero-logo" src="images/PomoDDoro_LOGO.png" alt="PomoDDoro">
 
                 <h1>
                     PomoDDoro<br>
-                    <span>работай с фокусом</span>
+                    <span data-ru="работай с фокусом" data-en="focus on what matters">работай с фокусом</span>
                 </h1>
 
-                <p>
-                    Pomodoro-таймер с планировщиком задач,
-                    матрицей приоритетов и статистикой затраченного времени.
+                <p data-ru="Pomodoro-таймер с планировщиком задач, матрицей приоритетов, комментариями и статистикой затраченного времени. Светлая и тёмная темы, экспорт в Excel."
+                   data-en="A Pomodoro timer with a task planner, priority matrix, task comments and time tracking. Light and dark themes, Excel export.">
+                    Pomodoro-таймер с планировщиком задач, матрицей приоритетов, комментариями и статистикой затраченного времени. Светлая и тёмная темы, экспорт в Excel.
                 </p>
 
                 <div class="buttons">
 
-                    <a class="button button-primary"
+                    <!-- Windows-кнопка -->
+                    <a class="button button-windows"
                        href="https://github.com/BIMForgeLab/pomodoro-timer/releases/latest"
                        target="_blank" rel="noopener">
-                        ⬇ Скачать бесплатно
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 5.5 10.5 4.4v7.1H3V5.5Zm0 13 7.5 1.1v-7H3v5.9Zm8.5 1.2L21 21V12.5h-9.5v7.2Zm0-15.4v7.2H21V3l-9.5 1.3Z"/>
+                        </svg>
+                        <span data-ru="Скачать для Windows" data-en="Download for Windows">Скачать для Windows</span>
                     </a>
 
                     <a class="button button-secondary"
@@ -551,7 +688,7 @@
                     <a class="button button-support"
                        href="https://pay.cloudtips.ru/p/b29bdd2b"
                        target="_blank" rel="noopener">
-                        ❤️ Поддержать разработку
+                        <span data-ru="❤️ Поддержать" data-en="❤️ Support">❤️ Поддержать</span>
                     </a>
 
                 </div>
@@ -559,358 +696,250 @@
             </div>
 
             <div class="screenshot-frame hero-shot">
-                <img src="images/Интерфейсv3.jpg"
-                     alt="Интерфейс PomoDDoro"
+                <img src="images/main.png"
+                     alt="Главное окно PomoDDoro — светлая тема"
                      loading="eager">
             </div>
 
         </div>
-
     </section>
 
 
     <!-- FEATURES -->
 
     <section class="features" id="features">
-
         <div class="container">
 
-            <h2 class="section-title">
+            <h2 class="section-title" data-ru="Возможности PomoDDoro" data-en="PomoDDoro features">
                 Возможности PomoDDoro
             </h2>
 
-            <p class="section-subtitle">
-                Приложение помогает не только соблюдать интервалы
-                Pomodoro, но и организовать задачи и учитывать фактически
-                затраченное время.
+            <p class="section-subtitle"
+               data-ru="Приложение помогает не только соблюдать интервалы Pomodoro, но и организовать задачи, вести заметки и учитывать фактически затраченное время."
+               data-en="The app helps you not only stick to Pomodoro intervals, but also organize tasks, keep notes, and track actual time spent.">
+                Приложение помогает не только соблюдать интервалы Pomodoro, но и организовать задачи, вести заметки и учитывать фактически затраченное время.
             </p>
 
             <div class="feature-grid">
 
                 <div class="feature">
                     <div class="feature-icon">⏱</div>
-                    <h3>Pomodoro-таймер</h3>
-                    <p>
-                        Настраивайте продолжительность работы и отдыха
-                        и переключайтесь между ними прямо из приложения.
+                    <h3 data-ru="Pomodoro-таймер" data-en="Pomodoro timer">Pomodoro-таймер</h3>
+                    <p data-ru="Три режима — работа, отдых и большой отдых. Продолжительность от 1 до 40 минут настраивается перетаскиванием маркера."
+                       data-en="Three modes — work, rest and long rest. Duration from 1 to 40 minutes is adjustable by dragging the slider.">
+                        Три режима — работа, отдых и большой отдых. Продолжительность от 1 до 40 минут настраивается перетаскиванием маркера.
                     </p>
                 </div>
 
                 <div class="feature">
                     <div class="feature-icon">📋</div>
-                    <h3>Планировщик задач</h3>
-                    <p>
-                        Распределяйте задачи по четырём блокам
-                        в зависимости от их важности и срочности.
+                    <h3 data-ru="Планировщик задач" data-en="Task planner">Планировщик задач</h3>
+                    <p data-ru="Распределяйте задачи по четырём блокам в зависимости от важности и срочности. Поддерживается перетаскивание между блоками."
+                       data-en="Distribute tasks across four blocks by importance and urgency. Drag & drop between blocks is supported.">
+                        Распределяйте задачи по четырём блокам в зависимости от важности и срочности. Поддерживается перетаскивание между блоками.
                     </p>
                 </div>
 
                 <div class="feature">
-                    <div class="feature-icon">❗</div>
-                    <h3>Выделение важных задач</h3>
-                    <p>
-                        Добавьте «!» в название задачи — и она будет
-                        выделена красным среди остальных задач.
+                    <div class="feature-icon">🎯</div>
+                    <h3 data-ru="Активная задача" data-en="Active task">Активная задача</h3>
+                    <p data-ru="Выбранная задача отображается прямо на карточке таймера — вы всегда видите, над чем именно идёт работа."
+                       data-en="The selected task is shown right on the timer card — you always see exactly what you're working on.">
+                        Выбранная задача отображается прямо на карточке таймера — вы всегда видите, над чем именно идёт работа.
                     </p>
                 </div>
 
                 <div class="feature">
-                    <div class="feature-icon">↩</div>
-                    <h3>Возврат закрытых задач</h3>
-                    <p>
-                        Случайно закрыли задачу? Её можно восстановить
-                        из окна статистики с помощью стрелки справа.
+                    <div class="feature-icon">📝</div>
+                    <h3 data-ru="Комментарии к задачам" data-en="Task comments">Комментарии к задачам</h3>
+                    <p data-ru="Добавляйте подробное описание, ссылки, этапы выполнения и промежуточные итоги. Зелёная точка показывает, что комментарий заполнен."
+                       data-en="Add detailed descriptions, links, milestones and intermediate results. A green dot indicates the comment is filled in.">
+                        Добавляйте подробное описание, ссылки, этапы выполнения и промежуточные итоги. Зелёная точка показывает, что комментарий заполнен.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🗄</div>
+                    <h3 data-ru="Архив задач" data-en="Task archive">Архив задач</h3>
+                    <p data-ru="Закрытые задачи не удаляются, а отправляются в архив. Их можно вернуть обратно в свой блок из окна статистики."
+                       data-en="Closed tasks are archived, not deleted. You can restore them back to their block from the statistics window.">
+                        Закрытые задачи не удаляются, а отправляются в архив. Их можно вернуть обратно в свой блок из окна статистики.
                     </p>
                 </div>
 
                 <div class="feature">
                     <div class="feature-icon">🕒</div>
-                    <h3>Учёт затраченного времени</h3>
-                    <p>
-                        Если задача была закрыта вне активного таймера
-                        «Работа», приложение предложит указать фактически
-                        затраченное на неё время.
+                    <h3 data-ru="Учёт затраченного времени" data-en="Time tracking">Учёт затраченного времени</h3>
+                    <p data-ru="Если задача закрыта вне активного таймера, приложение предложит указать фактически затраченное на неё время вручную."
+                       data-en="If a task is closed while the timer isn't running, the app will prompt you to enter the actual time spent.">
+                        Если задача закрыта вне активного таймера, приложение предложит указать фактически затраченное на неё время вручную.
                     </p>
                 </div>
 
                 <div class="feature">
                     <div class="feature-icon">📊</div>
-                    <h3>Статистика</h3>
-                    <p>
-                        Просматривайте историю задач и затраченное время
-                        в отдельном окне статистики.
-                    </p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">🔎</div>
-                    <h3>Фильтрация задач</h3>
-                    <p>
-                        В окне статистики можно фильтровать записи,
-                        чтобы быстро найти нужные задачи.
+                    <h3 data-ru="Статистика" data-en="Statistics">Статистика</h3>
+                    <p data-ru="Отдельное окно с историей задач, сортировкой по колонкам, фильтрами и редактированием архивных записей."
+                       data-en="A separate window with task history, column sorting, filters and editable archive records.">
+                        Отдельное окно с историей задач, сортировкой по колонкам, фильтрами и редактированием архивных записей.
                     </p>
                 </div>
 
                 <div class="feature">
                     <div class="feature-icon">🔔</div>
-                    <h3>Напоминание о завершении работы</h3>
-                    <p>
-                        После окончания таймера «Работа» окно начинает
-                        мерцать, предлагая продлить работу или перейти
-                        к отдыху.
+                    <h3 data-ru="Звуковое уведомление" data-en="Sound notification">Звуковое уведомление</h3>
+                    <p data-ru="По окончании интервала карточка таймера пульсирует, а звук привлекает внимание. Звук можно отключить в настройках."
+                       data-en="When the interval ends, the timer card pulses, and a sound plays. You can disable the sound in settings.">
+                        По окончании интервала карточка таймера пульсирует, а звук привлекает внимание. Звук можно отключить в настройках.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">🌙</div>
+                    <h3 data-ru="Тёмная тема и языки" data-en="Dark theme & languages">Тёмная тема и языки</h3>
+                    <p data-ru="Стандартная и тёмная темы, русский и английский интерфейс. Режим «поверх всех окон» — чтобы таймер всегда был под рукой."
+                       data-en="Light and dark themes, Russian and English UI. Always-on-top mode keeps the timer within reach.">
+                        Стандартная и тёмная темы, русский и английский интерфейс. Режим «поверх всех окон» — чтобы таймер всегда был под рукой.
                     </p>
                 </div>
 
                 <div class="feature">
                     <div class="feature-icon">📤</div>
-                    <h3>Экспорт в Excel</h3>
-                    <p>
-                        Экспортируйте статистику затраченного времени
-                        в формат XLSX для дальнейшего анализа.
+                    <h3 data-ru="Экспорт в Excel" data-en="Excel export">Экспорт в Excel</h3>
+                    <p data-ru="Выгружайте статистику затраченного времени в формат XLSX. Экспортируются только видимые строки — с учётом фильтров."
+                       data-en="Export time statistics to XLSX. Only visible rows are exported — filters are respected.">
+                        Выгружайте статистику затраченного времени в формат XLSX. Экспортируются только видимые строки — с учётом фильтров.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">💾</div>
+                    <h3 data-ru="Экспорт и импорт данных" data-en="Data export & import">Экспорт и импорт данных</h3>
+                    <p data-ru="Переносите задачи, настройки и архив на другой компьютер одним ZIP-архивом через меню настроек."
+                       data-en="Transfer tasks, settings and archive to another computer with a single ZIP via the settings menu.">
+                        Переносите задачи, настройки и архив на другой компьютер одним ZIP-архивом через меню настроек.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-icon">❗</div>
+                    <h3 data-ru="Выделение важных задач" data-en="Highlighting important tasks">Выделение важных задач</h3>
+                    <p data-ru="Добавьте «!» в название задачи — и строка будет выделена бледно-красным цветом среди остальных."
+                       data-en="Add “!” to a task title and the row is highlighted in pale red among the others.">
+                        Добавьте «!» в название задачи — и строка будет выделена бледно-красным цветом среди остальных.
                     </p>
                 </div>
 
             </div>
-
         </div>
-
     </section>
 
 
-    <!-- SCREENSHOTS -->
+    <!-- WHY POMODDORO -->
 
-    <section class="showcase" id="screenshots">
-
+    <section class="why" id="why">
         <div class="container">
 
-            <h2 class="section-title">
-                Интерфейс приложения
+            <h2 class="section-title" data-ru="Почему PomoDDoro" data-en="Why PomoDDoro">
+                Почему PomoDDoro
             </h2>
 
-            <p class="section-subtitle">
-                Все основные инструменты находятся в одном окне:
-                таймер, текущая задача, статистика и четыре блока
-                планирования.
+            <p class="section-subtitle"
+               data-ru="Четыре причины выбрать именно этот Pomodoro-таймер."
+               data-en="Four reasons to choose this Pomodoro timer.">
+                Четыре причины выбрать именно этот Pomodoro-таймер.
             </p>
 
-            <div class="showcase-grid">
+            <div class="why-grid">
 
-                <div class="showcase-text">
-
-                    <h2>Работайте с задачами, а не просто с таймером</h2>
-
-                    <p>
-                        Выберите задачу и запустите рабочий интервал.
-                        Активная задача отображается непосредственно
-                        в области таймера.
+                <div class="why-card">
+                    <div class="why-num">01</div>
+                    <h3 data-ru="Не просто таймер" data-en="More than a timer">Не просто таймер</h3>
+                    <p data-ru="Планировщик и таймер в одном приложении."
+                       data-en="Planner and timer in one app.">
+                        Планировщик и таймер в одном приложении.
                     </p>
-
-                    <ul class="showcase-list">
-                        <li>четыре категории задач;</li>
-                        <li>перетаскивание задач между блоками;</li>
-                        <li>комментарии к задачам;</li>
-                        <li>настройка рабочего интервала и отдыха;</li>
-                        <li>видимый текущий прогресс таймера.</li>
-                    </ul>
-
                 </div>
 
-                <div class="screenshot-frame">
-                    <img src="images/Интерфейсv3.jpg"
-                         alt="Основное окно PomoDDoro с таймером и задачами"
-                         loading="lazy">
+                <div class="why-card">
+                    <div class="why-num">02</div>
+                    <h3 data-ru="Матрица Эйзенхауэра" data-en="Eisenhower matrix">Матрица Эйзенхауэра</h3>
+                    <p data-ru="Задачи распределяются по важности и срочности."
+                       data-en="Tasks are sorted by importance and urgency.">
+                        Задачи распределяются по важности и срочности.
+                    </p>
+                </div>
+
+                <div class="why-card">
+                    <div class="why-num">03</div>
+                    <h3 data-ru="Прозрачная статистика" data-en="Transparent statistics">Прозрачная статистика</h3>
+                    <p data-ru="Видно, сколько времени ушло на каждую задачу."
+                       data-en="See exactly how much time each task took.">
+                        Видно, сколько времени ушло на каждую задачу.
+                    </p>
+                </div>
+
+                <div class="why-card">
+                    <div class="why-num">04</div>
+                    <h3 data-ru="Полностью бесплатно" data-en="Completely free">Полностью бесплатно</h3>
+                    <p data-ru="Без рекламы, подписок и регистрации."
+                       data-en="No ads, subscriptions or sign-up.">
+                        Без рекламы, подписок и регистрации.
+                    </p>
                 </div>
 
             </div>
-
         </div>
-
     </section>
 
 
-    <!-- STATISTICS -->
+    <!-- TESTIMONIALS -->
 
-    <section class="showcase">
-
+    <section class="testimonials" id="reviews">
         <div class="container">
 
-            <div class="showcase-grid">
-
-                <div class="screenshot-frame stats-shot">
-                    <img src="images/Интерфейсv3_статистика.jpg"
-                         alt="Окно статистики затраченного времени PomoDDoro"
-                         loading="lazy">
-                </div>
-
-                <div class="showcase-text">
-
-                    <h2>Контролируйте затраченное время</h2>
-
-                    <p>
-                        В окне статистики собрана история выполненных
-                        задач и времени, которое было на них потрачено.
-                    </p>
-
-                    <ul class="showcase-list">
-                        <li>фильтрация записей;</li>
-                        <li>просмотр времени по каждой задаче;</li>
-                        <li>восстановление случайно закрытой задачи;</li>
-                        <li>экспорт данных в XLSX.</li>
-                    </ul>
-
-                </div>
-
-            </div>
-
-            <p class="caption">
-                Окно статистики затраченного времени
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- MATRIX -->
-
-    <section class="matrix-section" id="matrix">
-
-        <div class="container">
-
-            <h2 class="section-title">
-                Матрица приоритетов
+            <h2 class="section-title" data-ru="Отзывы пользователей" data-en="User reviews">
+                Отзывы пользователей
             </h2>
 
-            <p class="section-subtitle">
-                Разделяйте задачи по важности и срочности,
-                чтобы понимать, чему уделить внимание прямо сейчас.
+            <p class="section-subtitle"
+               data-ru="Что говорят те, кто уже попробовал PomoDDoro."
+               data-en="What people who tried PomoDDoro say.">
+                Что говорят те, кто уже попробовал PomoDDoro.
             </p>
 
-            <div class="matrix">
+            <div class="testimonial-grid">
 
-                <div class="matrix-item">
-                    <h3>🔴 Важные и срочные</h3>
-                    <p>
-                        Задачи, требующие немедленного внимания.
+                <div class="testimonial">
+                    <p class="testimonial-text"
+                       data-ru="«Наконец-то таймер, который не просто тикает, а показывает, над чем я работаю. Матрица задач — то, чего мне не хватало»."
+                       data-en="“Finally a timer that doesn't just tick, but shows what I'm working on. The task matrix is what I was missing.”">
+                        «Наконец-то таймер, который не просто тикает, а показывает, над чем я работаю. Матрица задач — то, чего мне не хватало».
                     </p>
+                    <div class="testimonial-author">
+                        <div class="avatar green">А</div>
+                        <div>
+                            <div class="author-name" data-ru="Алексей" data-en="Alexey">Алексей</div>
+                            <div class="author-role" data-ru="Разработчик" data-en="Developer">Разработчик</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="matrix-item">
-                    <h3>🟡 Важные, но не срочные</h3>
-                    <p>
-                        Долгосрочные цели и стратегические задачи.
+                <div class="testimonial">
+                    <p class="testimonial-text"
+                       data-ru="«Экспорт статистики в Excel — это то, что я давно искал. Теперь вижу, куда уходит время, и планирую день точнее»."
+                       data-en="“Excel export is what I'd been looking for. Now I see where my time goes and plan the day more accurately.”">
+                        «Экспорт статистики в Excel — это то, что я давно искал. Теперь вижу, куда уходит время, и планирую день точнее».
                     </p>
+                    <div class="testimonial-author">
+                        <div class="avatar orange">М</div>
+                        <div>
+                            <div class="author-name" data-ru="Мария" data-en="Maria">Мария</div>
+                            <div class="author-role" data-ru="Фрилансер" data-en="Freelancer">Фрилансер</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="matrix-item">
-                    <h3>🟢 Второстепенные</h3>
-                    <p>
-                        Задачи, которые можно выполнить позже
-                        или делегировать.
-                    </p>
-                </div>
-
-                <div class="matrix-item">
-                    <h3>⚪ Идеи</h3>
-                    <p>
-                        Заметки, гипотезы и идеи,
-                        которые пока не нашли своего места.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- REQUIREMENTS -->
-
-    <section class="requirements" id="requirements">
-
-        <div class="container">
-
-            <h2 class="section-title">
-                Системные требования
-            </h2>
-
-            <div class="requirements-box">
-
-                <ul>
-                    <li><strong>ОС:</strong> Windows 10 / 11</li>
-                    <li><strong>Разрядность:</strong> x64</li>
-                    <li><strong>.NET:</strong> .NET Framework 4.8+</li>
-                    <li>
-                        <strong>Тип:</strong>
-                        портативное приложение,
-                        установка не требуется
-                    </li>
-                    <li>
-                        Для экспорта в Excel требуется
-                        Microsoft Excel или совместимый редактор,
-                        например LibreOffice Calc.
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- DOWNLOAD -->
-
-    <section class="download">
-
-        <div class="container">
-
-            <h2>Попробуйте PomoDDoro</h2>
-
-            <p>
-                Скачайте последнюю версию бесплатно
-                и попробуйте работать с задачами более осознанно.
-            </p>
-
-            <div class="download-buttons">
-
-                <a class="button button-primary"
-                   href="https://github.com/BIMForgeLab/pomodoro-timer/releases/latest"
-                   target="_blank" rel="noopener">
-                    ⬇ Скачать PomoDDoro
-                </a>
-
-                <a class="button button-support"
-                   href="https://pay.cloudtips.ru/p/b29bdd2b"
-                   target="_blank" rel="noopener">
-                    ❤️ Поддержать разработку
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<footer>
-
-    <div class="container">
-
-        <p>
-            © 2026 BIMForgeLab ·
-            <a href="https://github.com/BIMForgeLab"
-               target="_blank" rel="noopener">
-                GitHub
-            </a>
-        </p>
-
-    </div>
-
-</footer>
-
-</body>
-</html>
+                <div class="testimonial">
+                    <p class="testimonial-text"
+                       data-ru="«Тём
